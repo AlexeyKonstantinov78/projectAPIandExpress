@@ -4,10 +4,14 @@ import { userRouter } from './users/users.js';
 const port = 8000;
 const app = express();
 
-// обработчик  midlwere
-app.all('/hello', (req, res, next) => {
-  console.log('привет all');
+// обработчик для всех
+app.use((req, res, next) => {
+  console.log('время', Date.now());
   next();
+});
+// обработчик  midlwere
+app.get('/hello', (req, res) => {
+  res.end();
 });
 
 app.use('/users', userRouter);
@@ -15,6 +19,12 @@ app.use('/users', userRouter);
 // обработка не существующего ссылки
 app.get('/*', (req, res) => {  
   res.status(404).end();
+});
+
+// обработчик ошибок
+app.use((err, req, res, next) => {
+  console.log(err.message);
+  res.status(500).send(err.message);
 });
 
 app.listen(port, () => {

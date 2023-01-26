@@ -2,6 +2,11 @@ import express from 'express';
 
 const userRouter = express.Router();
 
+userRouter.use((req, res, next) => {
+  console.log('Обработчик users время', Date.now());
+  next();
+});
+
 userRouter.post('/login', (req, res) => {
   res.send('login');
 });
