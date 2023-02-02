@@ -8,7 +8,6 @@ import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
-import { User } from './user.entity';
 import { UserService } from './users.services';
 
 @injectable()
@@ -19,7 +18,7 @@ export class UserController extends BaseContriller implements IUserController {
 	) {
 		super(loggerService);
 		this.bindRoutes([
-			{ path: '/register', method: 'post', func: this.register },
+			{ path: '/register', method: 'post', func: this.register, middlewares: [] },
 			{ path: '/login', method: 'post', func: this.login },
 		]);
 	}
