@@ -42,6 +42,6 @@ export class UserController extends BaseContriller implements IUserController {
 		if (!result) {
 			return next(new HTTPError(422, 'Такой пользователь уже существует'));
 		}
-		this.ok(res, { email: result.email, name: result.name });
+		this.ok(res, { email: result.email, name: result.name, id: result.id });
 	}
 }
